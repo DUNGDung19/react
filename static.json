@@ -1,0 +1,12 @@
+{
+   " root " : " build / " ,
+   " tuyến " : {
+     " / ** " : " index.html "
+  },
+  " https_only " : true ,
+   " tiêu đề " : {
+     " / ** " : {
+       " Strict-Transport-Security " : " max-age = 31557600 "
+    }
+  }
+}
