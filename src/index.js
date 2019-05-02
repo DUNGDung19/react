@@ -270,6 +270,7 @@ class Calculator extends React.Component {
 		if(i === 'AC'){
 			cal = '';
 			memory = '';
+			total = '';
 		}
 		else if(i === 'C'){
             if(cal.length === 1){
