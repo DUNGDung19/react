@@ -3,12 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
+
+const point = ['+', '-', '*', '/'];
+const firstBtn = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '-'];
+
 function NumberButton (props) {
 	let nameBtn;
 	if(props.value === '=' || props.value === 'C' || props.value === 'AC'){
 		nameBtn = 'equal';
 	}
-	if(props.value === '+' || props.value === '-' || props.value === '*' || props.value === '/'){
+	if(point.includes(props.value)){
 		nameBtn = 'operator';
 	}
     return (
@@ -23,8 +27,6 @@ function Output (props){
 }
 
 function CheckPoint(cal, number){
-	const point = ['+', '-', '*', '/'];
-	const firstBtn = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '-'];
 	// Dấu trừ đầu tiên
 	if(!firstBtn.includes(cal[0])){
 		cal = cal.substr(0, cal.length-1);	
@@ -253,7 +255,7 @@ class Calculator extends React.Component {
 		super(props);
 		this.state = {
 			value: '',
-			total: 0,
+			total: '',
 			memory: '',
 		};
 		this.handleChange = this.handleChange.bind(this);
@@ -262,7 +264,7 @@ class Calculator extends React.Component {
 	handleClick(i){
 		let cal = this.state.value;
 		let memory = this.state.memory;
-		let total = 0;
+		let total = this.state.total;
 		
 		// Nút C
 		if(i === 'AC'){
@@ -270,10 +272,10 @@ class Calculator extends React.Component {
 			memory = '';
 		}
 		else if(i === 'C'){
-			if(cal.length === 1){
+            if(cal.length === 1){
 				memory ='';
-			}
-			cal = DeleteCal(cal);
+			} 
+            cal = DeleteCal(cal);
 		}
 		else if(i === '='){
 			total = EqualAction(cal);
@@ -283,8 +285,7 @@ class Calculator extends React.Component {
 				memory = '';
 				cal='';
 			}
-
-			if(memory !== ''){
+			if(memory !== '' && (point.includes(i)|| firstBtn.includes(i))){
 				cal=memory;
 				memory = '';
 			}
